@@ -1,3 +1,7 @@
 i.fa.fa-edit.fa-1x {
     cursor: pointer;
 }
+select {
+    word-wrap: normal;
+    margin-bottom: 10px;
+}
