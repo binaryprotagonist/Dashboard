@@ -1,8 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from "react";
+import jsonData from '../db/db.json';
 
-const API_HOST = "http://localhost:3000";
-const DASHBOARD_API_URL = `${API_HOST}/posts`;
+const myData = JSON.parse(JSON.stringify(jsonData));
+
+// const API_HOST = "http://localhost:3000";
+// const DASHBOARD_API_URL = `${API_HOST}/posts`;
 
 const Dashboard = () => {
   const [allRecords,  setAllRecords] = useState([]);
@@ -13,12 +16,13 @@ const Dashboard = () => {
   const [website, setWebsite] = useState("");
 
   const fetchInventory = () => {
-    fetch(`${DASHBOARD_API_URL}`)
-      .then((res) => res.json())
-      .then((json) => {
-        setAllRecords(json);
-        setData(json);
-      });
+    console.log(myData);
+    setAllRecords(myData.posts);
+    setData(myData.posts);
+    // fetch(`${DASHBOARD_API_URL}`)
+    //   .then((res) => res.json())
+    //   .then((json) => {
+    //   });
   };  
 
   useEffect(() => {
@@ -70,26 +74,43 @@ const Dashboard = () => {
     newUsername,
     newWebsite,
   }) => {
-    fetch(`${DASHBOARD_API_URL}/${id}`, {
-      method: "PATCH",
-      body: JSON.stringify({
-        name: newName,
-        email: newEmail,
-        username: newUsername,
-        website: newWebsite,
-      }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
+    const updatedReports = allRecords.map(el => {
+      if(el.id === id) {
+        return {
+          ...el,
+          name: newName,
+          email: newEmail,
+          username: newUsername,
+          website: newWebsite
+        }
+      }
+      return el;
     })
-      .then((response) => response.json())
-      .then((json) => {
-        // reset inEditMode and state values
-        onCancel();
 
-        // fetch the updated data
-        fetchInventory();
-      });
+    setAllRecords(updatedReports);
+    console.log(updatedReports);
+
+
+    // fetch(`${DASHBOARD_API_URL}/${id}`, {
+    //   method: "PATCH",
+    //   body: JSON.stringify({
+    //     name: newName,
+    //     email: newEmail,
+    //     username: newUsername,
+    //     website: newWebsite,
+    //   }),
+    //   headers: {
+    //     "Content-type": "application/json; charset=UTF-8",
+    //   },
+    // })
+    //   .then((response) => response.json())
+    //   .then((json) => {
+    //     // reset inEditMode and state values
+    //     onCancel();
+
+    //     // fetch the updated data
+    //     fetchInventory();
+    //   });
   };
 
   /**
