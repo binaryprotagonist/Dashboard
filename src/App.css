@@ -5,3 +5,28 @@ select {
     word-wrap: normal;
     margin-bottom: 10px;
 }
+.text-secondary {
+    color: #fff!important;
+}
+div#sidebar {
+    background: #282C4E !important;
+}
+.bg-dark {
+    background: #282C4E !important;
+}
+h5.mt-3.mb-3.text-secondary {
+    color: #6c757d!important;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #282C4E;
+    border-color: #282C4E;
+}
+.btn-primary:hover {
+    color: #fff;
+    background-color: #282C4E;
+    border-color: #282C4E;
+}
+a.text-secondary:focus, a.text-secondary:hover {
+    color: #fff!important;
+}
