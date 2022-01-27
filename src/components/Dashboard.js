@@ -139,7 +139,7 @@ const loadData = (type) => {
       </nav>
 
       <div className="row ">
-        <div className="col-lg-12 col-md-12 col-sm-12">
+        {/* <div className="col-lg-12 col-md-12 col-sm-12">
           <h5 className="mt-3 mb-3 text-secondary">
             Check Records Related to Application
           </h5>
@@ -368,7 +368,7 @@ const loadData = (type) => {
               </tbody>
             </table>
           </div>
-        </div>
+        </div> */}
 
         <div className="col-lg-12 col-md-12 col-sm-12">
           <h5 className="mt-3 mb-3 text-secondary">All Records of Employees</h5>
