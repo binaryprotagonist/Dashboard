@@ -8,7 +8,7 @@ export const Navbar = () => {
                     <button type="button" className="navbar-toggler mr-2 " data-toggle="offcanvas" title="Toggle responsive left sidebar">
                         <span className="navbar-toggler-icon"></span>
                     </button>
-                    <a className="navbar-brand" href="#" title="Free Bootstrap 4 Admin Template">Record Book</a>
+                    <a className="navbar-brand" href="#" title="Free Bootstrap 4 Admin Template">Test Task</a>
                 </div>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
                     <span className="navbar-toggler-icon"></span>

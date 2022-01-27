@@ -123,7 +123,7 @@ const loadData = (type) => {
   setData(tableData);
 }
   return (
-    <div className="col main pt-5 mt-3">
+    <div className="col main mt-3">
 
       <div className="row ">
     

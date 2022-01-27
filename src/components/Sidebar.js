@@ -4,7 +4,7 @@ import React from 'react'
 const Sidebar = () => {
     return (
          <div className="col-md-3 col-lg-2 sidebar-offcanvas pl-0" id="sidebar" role="navigation" style={{backgroundColor:"#e9ecef"}}>
-            <ul className="nav flex-column sticky-top pl-0 pt-5 p-3 mt-3 ">
+            <ul className="nav flex-column sticky-top pl-0 p-3 mt-3 ">
                 <li className="nav-item mb-2 mt-3"><a className="nav-link text-secondary" href="#"><h5>Test task</h5></a></li>
                 <li className="nav-item mb-2 "><a className="nav-link text-secondary" href="#"><i className="fas fa-user font-weight-bold"></i> <span className="ml-3">Overview</span></a></li>
                 <li className="nav-item mb-2">
@@ -17,8 +17,6 @@ const Sidebar = () => {
                 <li className="nav-item mb-2"><a className="nav-link text-secondary" href="#"><i className="far fa-chart-bar font-weight-bold"></i> <span className="ml-3">Analytics</span></a></li>
                 <li className="nav-item mb-2"><a className="nav-link text-secondary" href="#"><i className="fas fa-tablet-alt font-weight-bold"></i><span className="ml-3">Snippets</span></a></li>
                 <li className="nav-item mb-2"><a className="nav-link text-secondary" href="#"><i className="far fa-folder font-weight-bold"></i> <span className="ml-3">Layouts</span></a></li>
-                <li className="nav-item mb-2"><a className="nav-link text-secondary" href="#">Templates</a></li>
-                <li className="nav-item mb-2"><a className="nav-link text-secondary" href="#">Themes</a></li>
             </ul>
        </div>
     )

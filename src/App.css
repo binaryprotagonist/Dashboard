@@ -10,6 +10,7 @@ select {
 }
 div#sidebar {
     background: #282C4E !important;
+    min-height: 100vh;
 }
 .bg-dark {
     background: #282C4E !important;
