@@ -31,3 +31,16 @@ h5.mt-3.mb-3.text-secondary {
 a.text-secondary:focus, a.text-secondary:hover {
     color: #fff!important;
 }
+i.fa {
+    cursor: pointer;
+    margin-right: 5px;
+}
+th {
+    position: relative;
+}
+i.fa.fa-sort-down {
+    position: absolute;
+    top: 20px;
+    left: 12px;
+}
+
