@@ -319,7 +319,7 @@ const Dashboard = () => {
                         <td>
                           <div>team.org.in</div>
                         </td>
-                        <td>
+                        {/* <td>
                         {inEditMode.status && inEditMode.rowKey === item.id ? (
                           <React.Fragment>
                             <button
@@ -361,7 +361,7 @@ const Dashboard = () => {
                             Edit
                           </button>
                         )}
-                      </td>
+                      </td> */}
                       </tr>
                     ) : (
                       ""
