@@ -2,7 +2,7 @@
   "posts": [
     {
       "id": 1,
-      "type": "application",
+      "type": "vendor",
       "website": "Poscha.com",
       "name": "Poscha Team",
       "email": "poscha@outlook.com",
@@ -11,7 +11,8 @@
     {
       "website": "Ukrain.com",
       "id": 2,
-      "type": "application",
+      
+      "type": "vendor",
       "name": "Ukrain Ten",
       "email": "ukrain@yahoo.in",
       "username": "Ukrainast"
@@ -19,7 +20,7 @@
     {
       "id": 3,
       "name": "Clementine Bauchs",
-      "type": "application",
+      "type": "vendor",
       "username": "Samantha",
       "email": "Nathan@yesenia.net",
       "address": {

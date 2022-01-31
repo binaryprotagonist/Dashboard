@@ -14,7 +14,6 @@ const Dashboard = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [website, setWebsite] = useState("");
-  const [icon, setIcon] = useState(true);
 
   const fetchInventory = () => {
     console.log(myData);
