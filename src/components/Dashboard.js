@@ -107,7 +107,7 @@ const Dashboard = () => {
   };
   const toggleRow = (id) => {
     setInExpandMode({
-      status: true,
+      status: !inExpandMode.status,
       rowKey: id,
     });
     const forDataSelection = allChildRecords.filter(
@@ -234,10 +234,6 @@ const Dashboard = () => {
     }
     setData(tableData);
   };
-  const changeIcon = (item) => {
-    setIcon(item);
-    setIcon(!icon);
-  };
   return (
     <div className="col main mt-3">
       <div className="row ">
@@ -288,12 +284,13 @@ const Dashboard = () => {
                 {data.map((item) => (
                   <React.Fragment key={item.name}>
                     <tr onClick={() => toggleRow(item.id)}>
-                      <td onClick={() => changeIcon(item.id)}>
+                      <td onClick={() => toggleRow(item.id)}>
                         {/* {item.id} */}
-                        {icon ? (
-                          <i class="fa fa-caret-right"></i>
+                        {inExpandMode.status  && item.id===inExpandMode.rowKey? (
+                           <i class="fa fa-caret-down"></i>
+                         
                         ) : (
-                          <i class="fa fa-caret-down"></i>
+                          <i class="fa fa-caret-right"></i>
                         )}
                       </td>
                       <td>
