@@ -385,7 +385,7 @@ const Dashboard = () => {
                     </tr>
                     {inExpandMode.status && inExpandMode.rowKey === item.id
                       ? childData.map((el) => (
-                          <tr key={el.id} onClick={() => toggleRow(el.id)}>
+                          <tr key={el.id} >
                             <td>{/* <div>{item.id}</div> */}</td>
                             <td>
                               {" "}
