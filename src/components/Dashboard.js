@@ -7,6 +7,8 @@ const myData = JSON.parse(JSON.stringify(jsonData));
 const Dashboard = () => {
   const [allRecords, setAllRecords] = useState([]);
   const [data, setData] = useState([]);
+  const [subData, setSubData] = useState([]);
+  const [selectSubData, setSelectSubData] = useState(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -16,6 +18,7 @@ const Dashboard = () => {
     console.log(myData);
     setAllRecords(myData.posts);
     setData(myData.posts);
+    setSubData(myData.subData);
   };
 
   useEffect(() => {
@@ -88,6 +91,9 @@ const Dashboard = () => {
       status: true,
       rowKey: id,
     });
+    const forDataSelection = subData.filter((el) => el.referenceId === id)
+    console.log('cliekd', id, forDataSelection);
+    setSelectSubData(forDataSelection)
   };
 
   /**
@@ -302,70 +308,28 @@ const Dashboard = () => {
                         )}
                       </td>
                     </tr>
-                    {inExpandMode.status && inExpandMode.rowKey === item.id ? (
-                      <tr onClick={(id) => toggleRow(id)} key={item.id}>
-                        <td>
-                          <div>New</div>
-                        </td>
-                        <td>
-                          <div>Tim Saudhe</div>
-                        </td>
-                        <td>
-                          <div>tim@yahoo.com</div>
-                        </td>
-                        <td>
-                          <div>tim</div>
-                        </td>
-                        <td>
-                          <div>team.org.in</div>
-                        </td>
-                        {/* <td>
-                        {inEditMode.status && inEditMode.rowKey === item.id ? (
-                          <React.Fragment>
-                            <button
-                              className={"btn-success"}
-                              onClick={() =>
-                                onSave({
-                                  id: item.id,
-                                  newName: name,
-                                  newEmail: email,
-                                  newUsername: username,
-                                  newWebsite: website,
-                                })
-                              }
-                            >
-                              Save
-                            </button>
-
-                            <button
-                              className={"btn-secondary"}
-                              style={{ marginLeft: 8 }}
-                              onClick={() => onCancel()}
-                            >
-                              Cancel
-                            </button>
-                          </React.Fragment>
-                        ) : (
-                          <button
-                            className={"btn-primary"}
-                            onClick={() =>
-                              onEdit({
-                                id: item.id,
-                                currentName: item.name,
-                                currentEmail: item.email,
-                                currentUsername: item.username,
-                                currentWebsite: item.website,
-                              })
-                            }
-                          >
-                            Edit
-                          </button>
-                        )}
-                      </td> */}
-                      </tr>
-                    ) : (
-                      ""
-                    )}
+                    { 
+                      inExpandMode.status && inExpandMode.rowKey === item.id ? 
+                        selectSubData.map((el) => (
+                          <tr key={el.id}>
+                            <td>
+                              {/* <div>{item.id}</div> */}
+                            </td>
+                            <td>
+                              <div>{el.name}</div>
+                            </td>
+                            <td>
+                              <div>{el.email}</div>
+                            </td>
+                            <td>
+                            <div>{el.username}</div>
+                            </td>
+                            <td>
+                            <div>{el.website}</div>
+                            </td>
+                          </tr>
+                        )) : ""
+                    }
                   </React.Fragment>
                 ))}
               </tbody>
