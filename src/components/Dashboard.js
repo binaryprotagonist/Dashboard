@@ -52,18 +52,6 @@ const Dashboard = () => {
     setAllRecords(sorteddata);
     setData(sorteddata);
   };
-  const ascId = () => {
-    const oldData = JSON.parse(JSON.stringify(data));
-    let sorteddata = oldData.sort((a, b) => (a.id > b.id ? 1 : -1));
-    setAllRecords(sorteddata);
-    setData(sorteddata);
-  };
-  const decId = () => {
-    const oldData = JSON.parse(JSON.stringify(data));
-    let sorteddata = oldData.sort((a, b) => (b.id > a.id ? 1 : -1));
-    setAllRecords(sorteddata);
-    setData(sorteddata);
-  };
   /**
    *
    * @param id - The id of the website
@@ -252,9 +240,7 @@ const Dashboard = () => {
               <thead className="thead-light">
                 <tr>
                   <th>
-                    {" "}
-                    <i onClick={ascId} class="fa fa-sort-up"></i>
-                    <i onClick={decId} class="fa fa-sort-down"></i>No{" "}
+No{" "}
                   </th>
                   <th>
                     <i onClick={sortData} class="fa fa-sort-up"></i>
@@ -282,7 +268,7 @@ const Dashboard = () => {
               <tbody>
                 {data.map((item) => (
                   <React.Fragment key={item.name}>
-                    <tr onClick={() => toggleRow(item.id)}>
+                    <tr>
                       <td onClick={() => toggleRow(item.id)}>
                         {/* {item.id} */}
                         {inExpandMode.status  && item.id===inExpandMode.rowKey? (

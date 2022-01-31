@@ -12,8 +12,6 @@ function App() {
       <div className='row row-offcanvas row-offcanvas-left'>
         <Sidebar/>
         <Dashboard />
-        {/* <Dash/> */}
-        {/* <ReactTable /> */}
       </div>
     </div>
     </div>
