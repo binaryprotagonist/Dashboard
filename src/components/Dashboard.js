@@ -8,17 +8,21 @@ const Dashboard = () => {
   const [allRecords, setAllRecords] = useState([]);
   const [data, setData] = useState([]);
   const [subData, setSubData] = useState([]);
-  const [selectSubData, setSelectSubData] = useState(null);
+  const [allChildRecords, setChildAllRecords] = useState([]);
+  const [childData, setChildData] = useState([]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [website, setWebsite] = useState("");
+  const [icon, setIcon] = useState(true);
 
   const fetchInventory = () => {
     console.log(myData);
     setAllRecords(myData.posts);
     setData(myData.posts);
     setSubData(myData.subData);
+    setChildAllRecords(myData.subData);
+    setChildData(myData.subData);
   };
 
   useEffect(() => {
@@ -85,15 +89,32 @@ const Dashboard = () => {
     setUsername(currentUsername);
     setWebsite(currentWebsite);
   };
-
+  const onEditChild = ({
+    id,
+    currentName,
+    currentEmail,
+    currentUsername,
+    currentWebsite,
+  }) => {
+    setInEditMode({
+      status: true,
+      rowKey: id,
+    });
+    setName(currentName);
+    setEmail(currentEmail);
+    setUsername(currentUsername);
+    setWebsite(currentWebsite);
+  };
   const toggleRow = (id) => {
     setInExpandMode({
       status: true,
       rowKey: id,
     });
-    const forDataSelection = subData.filter((el) => el.referenceId === id)
-    console.log('cliekd', id, forDataSelection);
-    setSelectSubData(forDataSelection)
+    const forDataSelection = allChildRecords.filter(
+      (el) => el.referenceId === id
+    );
+    console.log("cliekd", id, forDataSelection);
+    setChildData(forDataSelection);
   };
 
   /**
@@ -133,7 +154,45 @@ const Dashboard = () => {
     });
     console.log(updatedReports);
   };
-
+  const updateChildInventory = ({
+    id,
+    newName,
+    newEmail,
+    newUsername,
+    newWebsite,
+  }) => {
+    const updatedChildReports = allChildRecords.map((el) => {
+      if (el.id === id) {
+        return {
+          ...el,
+          name: newName,
+          email: newEmail,
+          username: newUsername,
+          website: newWebsite,
+        };
+      }
+      return el;
+    });
+    const updatedChildData = childData.map((el) => {
+      if (el.id === id) {
+        return {
+          ...el,
+          name: newName,
+          email: newEmail,
+          username: newUsername,
+          website: newWebsite,
+        };
+      }
+      return el;
+    });
+    setChildAllRecords(updatedChildReports);
+    setChildData(updatedChildData);
+    setInEditMode({
+      status: false,
+      rowKey: id,
+    });
+    console.log(updatedChildReports);
+  };
   /**
    *
    * @param id -The id of the website
@@ -144,6 +203,9 @@ const Dashboard = () => {
    */
   const onSave = ({ id, newName, newEmail, newUsername, newWebsite }) => {
     updateInventory({ id, newName, newEmail, newUsername, newWebsite });
+  };
+  const onSaveChild = ({ id, newName, newEmail, newUsername, newWebsite }) => {
+    updateChildInventory({ id, newName, newEmail, newUsername, newWebsite });
   };
 
   const onCancel = () => {
@@ -172,7 +234,10 @@ const Dashboard = () => {
     }
     setData(tableData);
   };
-
+  const changeIcon = (item) => {
+    setIcon(item);
+    setIcon(!icon);
+  };
   return (
     <div className="col main mt-3">
       <div className="row ">
@@ -191,8 +256,11 @@ const Dashboard = () => {
             <table className="table table-striped">
               <thead className="thead-light">
                 <tr>
-                  <th> <i onClick={ascId} class="fa fa-sort-up"></i>
-                    <i onClick={decId} class="fa fa-sort-down"></i>No </th>
+                  <th>
+                    {" "}
+                    <i onClick={ascId} class="fa fa-sort-up"></i>
+                    <i onClick={decId} class="fa fa-sort-down"></i>No{" "}
+                  </th>
                   <th>
                     <i onClick={sortData} class="fa fa-sort-up"></i>
                     <i onClick={decData} class="fa fa-sort-down"></i>Name{" "}
@@ -220,7 +288,14 @@ const Dashboard = () => {
                 {data.map((item) => (
                   <React.Fragment key={item.name}>
                     <tr onClick={() => toggleRow(item.id)}>
-                      <td>{item.id}</td>
+                      <td onClick={() => changeIcon(item.id)}>
+                        {/* {item.id} */}
+                        {icon ? (
+                          <i class="fa fa-caret-right"></i>
+                        ) : (
+                          <i class="fa fa-caret-down"></i>
+                        )}
+                      </td>
                       <td>
                         {inEditMode.status && inEditMode.rowKey === item.id ? (
                           <input
@@ -308,28 +383,111 @@ const Dashboard = () => {
                         )}
                       </td>
                     </tr>
-                    { 
-                      inExpandMode.status && inExpandMode.rowKey === item.id ? 
-                        selectSubData.map((el) => (
-                          <tr key={el.id}>
+                    {inExpandMode.status && inExpandMode.rowKey === item.id
+                      ? childData.map((el) => (
+                          <tr key={el.id} onClick={() => toggleRow(el.id)}>
+                            <td>{/* <div>{item.id}</div> */}</td>
                             <td>
-                              {/* <div>{item.id}</div> */}
+                              {" "}
+                              {inEditMode.status &&
+                              inEditMode.rowKey === el.id ? (
+                                <input
+                                  value={name}
+                                  onChange={(event) =>
+                                    setName(event.target.value)
+                                  }
+                                />
+                              ) : (
+                                el.name
+                              )}
+                            </td>
+
+                            <td>
+                              {inEditMode.status &&
+                              inEditMode.rowKey === el.id ? (
+                                <input
+                                  value={email}
+                                  onChange={(event) =>
+                                    setEmail(event.target.value)
+                                  }
+                                />
+                              ) : (
+                                el.email
+                              )}
                             </td>
                             <td>
-                              <div>{el.name}</div>
+                              {inEditMode.status &&
+                              inEditMode.rowKey === el.id ? (
+                                <input
+                                  value={username}
+                                  onChange={(event) =>
+                                    setUsername(event.target.value)
+                                  }
+                                />
+                              ) : (
+                                el.username
+                              )}
                             </td>
                             <td>
-                              <div>{el.email}</div>
+                              {inEditMode.status &&
+                              inEditMode.rowKey === el.id ? (
+                                <input
+                                  value={website}
+                                  onChange={(event) =>
+                                    setWebsite(event.target.value)
+                                  }
+                                />
+                              ) : (
+                                el.website
+                              )}
                             </td>
                             <td>
-                            <div>{el.username}</div>
-                            </td>
-                            <td>
-                            <div>{el.website}</div>
+                              {inEditMode.status &&
+                              inEditMode.rowKey === el.id ? (
+                                <React.Fragment>
+                                  <button
+                                    className={"btn-success"}
+                                    onClick={() =>
+                                      onSaveChild({
+                                        id: el.id,
+                                        newName: name,
+                                        newEmail: email,
+                                        newUsername: username,
+                                        newWebsite: website,
+                                      })
+                                    }
+                                  >
+                                    Save
+                                  </button>
+
+                                  <button
+                                    className={"btn-secondary"}
+                                    style={{ marginLeft: 8 }}
+                                    onClick={() => onCancel()}
+                                  >
+                                    Cancel
+                                  </button>
+                                </React.Fragment>
+                              ) : (
+                                <button
+                                  className={"btn-primary"}
+                                  onClick={() =>
+                                    onEditChild({
+                                      id: el.id,
+                                      currentName: el.name,
+                                      currentEmail: el.email,
+                                      currentUsername: el.username,
+                                      currentWebsite: el.website,
+                                    })
+                                  }
+                                >
+                                  Edit
+                                </button>
+                              )}
                             </td>
                           </tr>
-                        )) : ""
-                    }
+                        ))
+                      : ""}
                   </React.Fragment>
                 ))}
               </tbody>
